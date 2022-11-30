@@ -1,3 +1,9 @@
+package com.exmpale;
+
+import com.exmpale.models.AttemptsManager;
+import com.exmpale.models.PointRequest;
+import com.exmpale.models.PointResult;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,32 +14,49 @@ import java.io.IOException;
 
 @WebServlet(name="areacheck")
 public class AreaCheckServlet extends HttpServlet {
+    @Inject
+    private AttemptsManager am;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        float x = Float.parseFloat(req.getParameter("x"));
-        float y = Float.parseFloat(req.getParameter("y"));
-        String[] rs = req.getParameterValues("r");
-        float[] rf = new float[rs.length];
-        for (int i = 0; i < rs.length; i++) {
-            rf[i] = Float.parseFloat(rs[i]);
-        }
+        PointRequest pr = (PointRequest) req.getAttribute("pr");
 
-        boolean[] res = new boolean[rf.length];
+        StringBuilder redirectPath = new StringBuilder();
+        redirectPath.append(getServletContext().getContextPath());
+        redirectPath.append("/view_results?");
 
-        for (int i = 0; i < res.length; i++) {
-            if (x >= 0) {
-                if (y >= 0) {
-                    res[i] = y <= rf[i] / 2 - x;
+        for (int i = 0; i < pr.getRSize(); i++) {
+            long startTime = System.nanoTime();
+            boolean result;
+
+            if (pr.getX() >= 0) {
+                if (pr.getY() >= 0) {
+                    result = pr.getY() <= pr.getR(i) / 2 - pr.getX();
                 } else {
-                    res[i] = (x <= rf[i]) & (y >= -rf[i]);
+                    result = (pr.getX() <= pr.getR(i)) & (pr.getY() >= -pr.getR(i));
                 }
             } else {
-                if (y >= 0) {
-                    res[i] = (rf[i] / 2.0f)*(rf[i] / 2.0f) >= (x*x + y*y);
+                if (pr.getY() >= 0) {
+                    result = (pr.getR(i) / 2.0f) * (pr.getR(i) / 2.0f) >= (pr.getX() * pr.getX() + pr.getY() * pr.getY());
                 } else {
-                    res[i] = false;
+                    result = false;
                 }
             }
+
+            PointResult attempt = new PointResult(
+                    pr.getX(),
+                    pr.getY(),
+                    pr.getR(i),
+                    result,
+                    System.currentTimeMillis(),
+                    (System.nanoTime() - startTime) / 1000d
+            );
+            redirectPath.append("results=");
+            redirectPath.append(am.getResults().size());
+            if (i < pr.getRSize() - 1) redirectPath.append('&');
+            am.addResult(attempt);
         }
+
+        resp.sendRedirect(redirectPath.toString());
     }
 }

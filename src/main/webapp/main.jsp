@@ -1,23 +1,25 @@
+<%@page pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>WebLab1 Миняев Илья </title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <meta charset="UTF-8" />
+    <title>WebLab2 Миняев Илья </title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+    <script src="js/table.js" defer></script>
 </head>
 
 <body style="background-color: #dfe19d">
 <!-- name and group -->
 <header id="header" style="margin-bottom: 2%;">
-    <span>Миняев Илья P32312 Вариант: 3210</span>
+    <span>Миняев Илья P32312 Вариант: 3231211</span>
 </header>
 
 <!-- Main data -->
 <div class="main" style="display:flex; justify-content: center;">
     <!-- Form to send -->
     <div>
-        <form id="forms" class="forms" onSubmit="sendRequest(); return false;" onreset="$('.Error_text').html(''); $('.dot').attr('r', '0');" >
+        <form id="forms" class="forms" method="POST" action="<%=request.getContextPath()%>">
 
             <div class="form">
                 <div class="values">
@@ -26,36 +28,36 @@
 
                     <div class="X_value">
                         <label class="X_value"> X: </label><br>
-
-                        <input value="-2" type="checkbox" id="x_-2" name="X_checkbox" onchange="add_X_value(this.id)"><label for="x_-2">-2</label><br>
-                        <input value="-1.5" type="checkbox" id="x_-1.5" name="X_checkbox" onchange="add_X_value(this.id)"><label for="x_-1.5">-1.5</label><br>
-                        <input value="-1" type="checkbox" id="x_-1" name="X_checkbox" onchange="add_X_value(this.id)"><label for="x_-1">-1</label><br>
-                        <input value="-0.5" type="checkbox" id="x_-0.5" name="X_checkbox" onchange="add_X_value(this.id)"><label for="x_-0.5">-0.5</label><br>
-
-                        <input value="0" type="checkbox" id="x_0" name="X_checkbox" onchange="add_X_value(this.id)"><label for="x_0">0</label><br>
-
-                        <input value="0.5" type="checkbox" id="x_0.5" name="X_checkbox" onchange="add_X_value(this.id)"><label for="x_0.5">0.5</label><br>
-                        <input value="1" type="checkbox" id="x_1" name="X_checkbox" onchange="add_X_value(this.id)"><label for="x_1">1</label><br>
-                        <input value="1.5" type="checkbox" id="x_1.5" name="X_checkbox" onchange="add_X_value(this.id)"><label for="x_1.5">1.5</label><br>
-                        <input value="2" type="checkbox" id="x_2" name="X_checkbox" onchange="add_X_value(this.id)"><label for="x_2">2</label><br>
+                        <input value="-3" type="radio" id="x_-3" name="x"><label for="x_-3">-3</label><br>
+                        <input value="-2" type="radio" id="x_-2" name="x"><label for="x_-2">-2</label><br>
+                        <input value="-1" type="radio" id="x_-1" name="x"><label for="x_-1">-1</label><br>
+                        <input value="0" type="radio" id="x_0" name="x"><label for="x_0">0</label><br>
+                        <input value="1" type="radio" id="x_1" name="x"><label for="x_1">1</label><br>
+                        <input value="2" type="radio" id="x_2" name="x"><label for="x_2">2</label><br>
+                        <input value="3" type="radio" id="x_3" name="x"><label for="x_3">3</label><br>
                     </div>
 
 
                     <!-- Y value block -->
                     <div class="Y_value">
                         <label for="Y_value"> Y[-3; 5]: </label>
-                        <input type="text" name="Y_value" id="Y_value" style="margin-left: 5px" placeholder="Enter Y coordinate"/>
+                        <input type="text" name="y" id="Y_value" style="margin-left: 5px" placeholder="Enter Y coordinate"/>
                     </div>
 
                     <!-- R value block -->
                     <div class="R_value">
-                        <label for="R_value"> R[1; 4]: </label>
-                        <input type="text" name="R_value" id="R_value" style="margin-left: 11px" placeholder="Enter Radius"/>
+
+                        <label class="R_value"> R: </label><br>
+                        <input value="1" type="checkbox" id="r_1" name="r"><label for="r_1">1</label><br>
+                        <input value="2" type="checkbox" id="r_2" name="r"><label for="r_2">2</label><br>
+                        <input value="3" type="checkbox" id="r_3" name="r"><label for="r_3">3</label><br>
+                        <input value="4" type="checkbox" id="r_4" name="r"><label for="r_4">4</label><br>
+                        <input value="5" type="checkbox" id="r_5" name="r"><label for="r_5">5</label><br>
                     </div>
                     <!-- Buttons reset and submit block -->
                     <div class="buttons">
                         <input type ="submit" value="submit" id="submit">
-                        <input type="reset" value="reset" id="reset" onclick="clearCheckboxArray()">
+                        <input type="reset" value="reset" id="reset">
                     </div>
                     <!-- Error text block -->
                     <div class="Error_text" style="margin: 5%; display:grid;">
@@ -91,10 +93,11 @@
             <line x1="140" x2="160" y1="200" y2="200"></line>
             <line x1="140" x2="160" y1="250" y2="250"></line>
             <!-- Rectangle -->
-            <polygon stroke="blue" fill="blue" fill-opacity="0.3" points="150,50 150,150 250,150 250,50"></polygon>
+            <polygon stroke="purple" fill="purple" fill-opacity="0.3" points="150,250 150,150 250,150 250,250"></polygon>
             <!-- Tringle -->
-            <polygon stroke="blue" fill="blue" fill-opacity="0.3" points="150,100 150,150  100,150"></polygon>
+            <polygon stroke="purple" fill="purple" fill-opacity="0.3" points="150,100 150,150  200,150"></polygon>
             <!-- dots -->
+            <circle cx="50" cy="150" r="1" stroke="black" stroke-width="3" />
             <circle cx="150" cy="50" r="1" stroke="black" stroke-width="3" />
             <circle cx="150" cy="100" r="1" stroke="black" stroke-width="3" />
             <circle cx="150" cy="150" r="1" stroke="black" stroke-width="3" />
@@ -102,8 +105,9 @@
             <circle cx="100" cy="150" r="1" stroke="black" stroke-width="3" />
             <circle cx="150" cy="200" r="1" stroke="black" stroke-width="3" />
             <circle cx="250" cy="150" r="1" stroke="black" stroke-width="3" />
+            <circle cx="150" cy="250" r="1" stroke="black" stroke-width="3" />
             <!-- Circle -->
-            <path stroke="blue" fill="blue" fill-opacity="0.3" d="M150,200 A50,50 90 0,0 200,150 L 150,150 Z"></path>
+            <path stroke="purple" fill="purple" fill-opacity="0.3" d="M150,100 A50,50 90 0,0 100,150 L 150,150 Z"></path>
 
             <text x="285" y="135">X</text>
             <text x="160" y="15">Y</text>
@@ -133,22 +137,20 @@
 </div>
 <!-- table blocks -->
 <div style="display: grid; justify-items: center; align-content: flex-start;">
-    <div id="cleaner" class="cleaner">
-        <input type="button" value="Clean" id="clear_button" onclick="cleanTable()">
-    </div>
     <div>
         <table id="table">
             <thead>
             <tr>
                 <th style="width: 100px;">X coordinate</th>
                 <th style="width: 100px;">Y coordinate</th>
-                <th style="width: 100px;">Radious</th>
+                <th style="width: 100px;">Radius</th>
                 <th style="width: 100px;">Result</th>
-                <th style="width: 100px;">Current time</th>
+                <th style="width: 100px;">Attempt time</th>
                 <th style="width: 100px;">Execution time</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="results-table-body">
+
             </tbody>
         </table>
     </div>

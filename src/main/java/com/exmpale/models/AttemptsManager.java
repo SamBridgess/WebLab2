@@ -21,4 +21,5 @@ public class AttemptsManager {
     public void addResult(PointResult result) {
         results.add(result);
     }
+    public void clear() {results.clear();}
 }

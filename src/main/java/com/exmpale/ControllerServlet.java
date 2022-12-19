@@ -24,6 +24,9 @@ public class ControllerServlet extends HttpServlet {
 
         if (requestedResource.equals("/attempts")) {
             getServletContext().getNamedDispatcher("attemptslist").forward(req, resp);
+        } else if (requestedResource.equals("/clean")) {
+            am.clear();
+            resp.sendRedirect(getServletContext().getContextPath());
         } else if (requestedResource.startsWith("/view_results")) {
             String[] requestedResults = req.getParameterValues("results");
             PointResult[] results = new PointResult[requestedResults.length];

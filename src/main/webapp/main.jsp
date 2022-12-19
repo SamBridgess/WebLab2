@@ -7,9 +7,10 @@
     <title>WebLab2 Миняев Илья </title>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
     <script src="js/table.js" defer></script>
+    <script src="js/validation.js" defer></script>
 </head>
 
-<body style="background-color: #dfe19d">
+<body style="background-color: #360c36">
 <!-- name and group -->
 <header id="header" style="margin-bottom: 2%;">
     <span>Миняев Илья P32312 Вариант: 3231211</span>
@@ -35,13 +36,14 @@
                         <input value="1" type="radio" id="x_1" name="x"><label for="x_1">1</label><br>
                         <input value="2" type="radio" id="x_2" name="x"><label for="x_2">2</label><br>
                         <input value="3" type="radio" id="x_3" name="x"><label for="x_3">3</label><br>
+                        <input value="" type="radio" id="X_value" name="x" hidden/>
                     </div>
 
 
                     <!-- Y value block -->
                     <div class="Y_value">
                         <label for="Y_value"> Y[-3; 5]: </label>
-                        <input type="text" name="y" id="Y_value" style="margin-left: 5px" placeholder="Enter Y coordinate"/>
+                        <input type="text" name="y" id="Y_value" style="margin-left: 5px" placeholder="Enter Y coordinate" maxlength="15"/>
                     </div>
 
                     <!-- R value block -->
@@ -56,7 +58,7 @@
                     </div>
                     <!-- Buttons reset and submit block -->
                     <div class="buttons">
-                        <input type ="submit" value="submit" id="submit">
+                        <input id="form-submit" type ="submit" value="submit" id="submit">
                         <input type="reset" value="reset" id="reset">
                     </div>
                     <!-- Error text block -->
@@ -75,7 +77,7 @@
     <!-- graphic -->
     <div style="margin-left: 6%;">
         <!-- Coordinates -->
-        <svg width="300" height="300" style="background-color:white">
+        <svg width="300" height="300" style="background-color:white" id="graph">
 
             <line x1="0" x2="300" y1="150" y2="150"  stroke="black"></line>
             <line x1="150" x2="150" y1="0" y2="300" stroke="black"></line>
@@ -122,22 +124,16 @@
             <text x="170" y="202.5">-R/2</text>
             <text x="170" y="252.5">-R</text>
 
-            <!-- Choice dot -->
-            <circle class="dot" id="d1" fill="red" color="red" r="0" cx="0" cy="0"/>
-            <circle class="dot" id="d2" fill="red" color="red" r="0" cx="0" cy="0"/>
-            <circle class="dot" id="d3" fill="red" color="red" r="0" cx="0" cy="0"/>
-            <circle class="dot" id="d4" fill="red" color="red" r="0" cx="0" cy="0"/>
-            <circle class="dot" id="d5" fill="red" color="red" r="0" cx="0" cy="0"/>
-            <circle class="dot" id="d6" fill="red" color="red" r="0" cx="0" cy="0"/>
-            <circle class="dot" id="d7" fill="red" color="red" r="0" cx="0" cy="0"/>
-            <circle class="dot" id="d8" fill="red" color="red" r="0" cx="0" cy="0"/>
-            <circle class="dot" id="d9" fill="red" color="red" r="0" cx="0" cy="0"/>
+            <g id="dots"></g>
         </svg>
     </div>
 </div>
 <!-- table blocks -->
 <div style="display: grid; justify-items: center; align-content: flex-start;">
     <div>
+        <div id="cleaner" class="cleaner">
+            <a href="<%=request.getContextPath()%>/clean"><input type="button" value="Clean" id="clear_button"></a>
+        </div>
         <table id="table">
             <thead>
             <tr>

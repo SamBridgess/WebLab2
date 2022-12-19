@@ -8,7 +8,7 @@
     <title>Result</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
-<body>
+<body style="background-color: #360c36">
     <div style="display: grid; justify-items: center; align-content: flex-start;">
         <div>
             <table id="table">
@@ -50,7 +50,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="<%=request.getContextPath()%>">Home</a>
+        <a href="<%=request.getContextPath()%>/"><button>Home</button></a>
     </div>
     <script>
         const timestampsEls = document.getElementsByClassName("timestamp-to-convert");

@@ -13,10 +13,10 @@
 #forms{
     border: 1px solid;
     width: 230px;
-    height: 330px;
+    height: 450px;
     padding: 5%;
     margin-bottom: 10%;
-    background-color: #959e4c;
+    background-color: #a46eb0;
 }
 #main > div{
     margin: 10px;
@@ -42,9 +42,9 @@ table {
 }
    
 td, th {
-    background-color: #959e4c;
+    background-color: #a46eb0;
 
-    border: 1px solid #959e4c;
+    border: 1px solid #a46eb0;
     text-align: left;
     padding: 8px;
 }
